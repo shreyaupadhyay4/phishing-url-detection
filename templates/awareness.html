@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-header">
+    <div>
+        <p class="eyebrow">Human Firewall</p>
+        <h1>Cybersecurity Awareness</h1>
+    </div>
+</section>
+{% set tips = [
+    ('🔐','Use strong passwords','Create unique passphrases with 16 or more characters.'),
+    ('🛡','Enable MFA','Add an extra approval step for sensitive accounts.'),
+    ('🔎','Inspect links','Hover and verify domains before opening any URL.'),
+    ('✉','Question urgency','Treat pressure, prizes, and threats as warning signs.'),
+    ('🧾','Verify requests','Confirm payment or password requests through another channel.'),
+    ('⬆','Update devices','Patch browsers, operating systems, and security tools often.'),
+    ('☁','Back up data','Keep recoverable copies away from your main device.'),
+    ('📎','Avoid unknown files','Do not open unexpected attachments or macros.'),
+    ('🌐','Use HTTPS carefully','HTTPS helps encryption, but it does not prove trust.'),
+    ('🚩','Report suspicious activity','Share suspicious emails and URLs with support quickly.')
+] %}
+<section class="awareness-grid">
+    {% for icon, title, desc in tips %}
+    <article class="tip-card neon-card">
+        <span class="tip-icon">{{ icon }}</span>
+        <h2>{{ title }}</h2>
+        <p>{{ desc }}</p>
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}

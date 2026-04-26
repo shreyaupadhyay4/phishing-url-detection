@@ -1,0 +1,4 @@
+.env
+__pycache__/
+*.pyc
+PhiUSIIL_Phishing_URL_Dataset.csv

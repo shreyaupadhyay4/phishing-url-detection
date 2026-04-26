@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="auth-card neon-card">
+    <div class="auth-brand"><span class="brand-mark">D</span><b>Detector</b><small>PhishGuard</small></div>
+    <h1>Reset password</h1>
+    <p>Choose a new password for your account.</p>
+    <form method="post">
+        <input type="password" name="password" placeholder="New password" required>
+        <button type="submit">Reset Password</button>
+    </form>
+</section>
+{% endblock %}

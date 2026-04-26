@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-header">
+    <div>
+        <p class="eyebrow">Identity</p>
+        <h1>Profile</h1>
+    </div>
+</section>
+<section class="profile-layout">
+    <article class="profile-card neon-card">
+        <div class="avatar">{{ user.username[:2]|upper }}</div>
+        <h2>{{ user.username }}</h2>
+        <span class="badge safe">Active</span>
+    </article>
+    <article class="panel neon-card profile-details">
+        <div><span>Username</span><strong>{{ user.username }}</strong></div>
+        <div><span>Email</span><strong>{{ user.email }}</strong></div>
+        <div><span>User ID</span><strong>#{{ user.id }}</strong></div>
+        <div><span>Status</span><strong>Verified analyst</strong></div>
+    </article>
+</section>
+{% endblock %}

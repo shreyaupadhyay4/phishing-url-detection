@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="auth-card neon-card">
+    <div class="auth-brand"><span class="brand-mark">D</span><b>Detector</b><small>PhishGuard</small></div>
+    <h1>Create account</h1>
+    <p>Join the phishing detection console.</p>
+    <form method="post">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Register</button>
+    </form>
+    <button class="google-btn" type="button" data-google-auth>Sign up with Google</button>
+    <div class="auth-links auth-links-center">
+        <span>Already have an account?</span>
+        <a href="{{ url_for('login') }}">Login</a>
+    </div>
+</section>
+{% endblock %}

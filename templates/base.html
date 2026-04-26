@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detector | PhishGuard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+{% set auth_pages = ['login', 'register', 'forgot', 'reset'] %}
+{% set is_auth = request.endpoint in auth_pages %}
+<div class="{{ 'auth-shell' if is_auth else 'app-shell' }}">
+    {% if not is_auth %}
+    <aside class="sidebar">
+        <a class="brand" href="{{ url_for('dashboard') }}">
+            <span class="brand-mark">D</span>
+            <span><b>Detector</b><small>PhishGuard</small></span>
+        </a>
+        <nav class="nav-menu">
+            <a class="{{ 'active' if request.endpoint == 'dashboard' else '' }}" href="{{ url_for('dashboard') }}"><span>▣</span> Dashboard</a>
+            <a class="{{ 'active' if request.endpoint == 'history' else '' }}" href="{{ url_for('history') }}"><span>◷</span> History</a>
+            <a class="{{ 'active' if request.endpoint == 'support' else '' }}" href="{{ url_for('support') }}"><span>✚</span> Support</a>
+            <a class="{{ 'active' if request.endpoint == 'profile' else '' }}" href="{{ url_for('profile') }}"><span>◉</span> Profile</a>
+            <a class="{{ 'active' if request.endpoint == 'awareness' else '' }}" href="{{ url_for('awareness') }}"><span>◇</span> Awareness</a>
+            <a href="{{ url_for('logout') }}"><span>↳</span> Logout</a>
+        </nav>
+    </aside>
+    {% endif %}
+    <main class="{{ 'auth-main' if is_auth else 'content' }}">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+    </main>
+</div>
+</body>
+</html>

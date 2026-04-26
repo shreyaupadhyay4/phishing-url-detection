@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="auth-card neon-card">
+    <div class="auth-brand"><span class="brand-mark">D</span><b>Detector</b><small>PhishGuard</small></div>
+    <h1>Recover access</h1>
+    <p>Enter your email to generate a reset link.</p>
+    <form method="post">
+        <input type="email" name="email" placeholder="Email address" required>
+        <button type="submit">Send Reset Link</button>
+    </form>
+    {% if reset_url %}
+    <div class="reset-panel">
+        <span>Password reset link generated</span>
+        <a href="{{ reset_url }}">Reset Password</a>
+        <small>{{ reset_url }}</small>
+    </div>
+    {% endif %}
+    <div class="auth-links"><a href="{{ url_for('login') }}">Back to login</a></div>
+</section>
+{% endblock %}

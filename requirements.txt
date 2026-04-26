@@ -1,0 +1,7 @@
+Flask
+Flask-MySQLdb
+gunicorn
+matplotlib
+mysqlclient
+pandas
+scikit-learn

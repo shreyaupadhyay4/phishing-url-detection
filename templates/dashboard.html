@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block content %}
+{% set risk_percent = 80 if risk_level == 'HIGH' else 50 if risk_level == 'MEDIUM' else 22 %}
+<section class="page-header">
+    <div>
+        <p class="eyebrow">Threat Intelligence Console</p>
+        <h1>Detector Dashboard</h1>
+    </div>
+    <span class="status-pill">Live ML Engine</span>
+</section>
+
+<section class="metric-grid">
+    <article class="metric-card neon-card">
+        <p>Total Scans</p>
+        <strong>{{ total }}</strong>
+        <span>URLs analyzed</span>
+    </article>
+    <article class="metric-card neon-card danger">
+        <p>Phishing Detected</p>
+        <strong>{{ phishing }}</strong>
+        <span>Blocked threats</span>
+    </article>
+    <article class="metric-card neon-card safe">
+        <p>Safe URLs</p>
+        <strong>{{ safe }}</strong>
+        <span>Trusted results</span>
+    </article>
+    <article class="metric-card neon-card">
+        <p>Risk Level</p>
+        <strong class="risk-{{ risk_level|lower }}">{{ risk_level }}</strong>
+        <span>Current account posture</span>
+    </article>
+</section>
+
+<section class="dashboard-grid">
+    <article class="panel scanner-panel neon-card">
+        <div class="section-title">
+            <p class="eyebrow">URL Scanner</p>
+            <h2>Analyze suspicious links</h2>
+        </div>
+        <form class="scanner-form" method="post">
+            <input type="text" name="url" placeholder="https://example.com/login" required>
+            <button type="submit">Scan URL</button>
+        </form>
+        {% if prediction %}
+        <div class="scan-result {{ 'is-danger' if prediction == 'Phishing' else 'is-safe' }}">
+            <span>{{ prediction }}</span>
+            <strong>{{ score }}%</strong>
+            <p>{{ 'High-confidence phishing indicators detected.' if prediction == 'Phishing' else 'No major phishing indicators detected.' }}</p>
+        </div>
+        {% else %}
+        <div class="empty-state">Submit a URL to generate an ML verdict and risk score.</div>
+        {% endif %}
+    </article>
+
+    <article class="panel intelligence-panel neon-card">
+        <div class="section-title">
+            <p class="eyebrow">System Intelligence</p>
+            <h2>Risk telemetry</h2>
+        </div>
+        <div class="intel-row">
+            <span>Risk score</span>
+            <b>{{ score if score is not none else risk_percent }}%</b>
+        </div>
+        <div class="progress"><span style="width: {{ score if score is not none else risk_percent }}%"></span></div>
+        <div class="intel-row">
+            <span>Threat ratio</span>
+            <b>{{ risk_percent }}%</b>
+        </div>
+        <div class="progress"><span style="width: {{ risk_percent }}%"></span></div>
+        <div class="intel-row">
+            <span>Model confidence</span>
+            <b>92%</b>
+        </div>
+        <div class="progress"><span style="width: 92%"></span></div>
+    </article>
+</section>
+
+{% endblock %}

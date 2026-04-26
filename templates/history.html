@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-header">
+    <div>
+        <p class="eyebrow">Audit Trail</p>
+        <h1>Scan History</h1>
+    </div>
+</section>
+<section class="panel neon-card table-panel">
+    <table>
+        <thead>
+            <tr><th>Scanned URL</th><th>Result</th><th>Score</th><th>Timestamp</th></tr>
+        </thead>
+        <tbody>
+        {% for h in history %}
+            <tr>
+                <td class="url-cell">{{ h.url }}</td>
+                <td><span class="badge {{ 'danger' if h.result == 'Phishing' else 'safe' }}">{{ h.result }}</span></td>
+                <td>{{ h.score }}%</td>
+                <td>{{ h.timestamp or h.created_at or 'Recent' }}</td>
+            </tr>
+        {% else %}
+            <tr><td colspan="4" class="empty-table">No scans recorded yet.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}
