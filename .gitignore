@@ -2,3 +2,5 @@
 __pycache__/
 *.pyc
 PhiUSIIL_Phishing_URL_Dataset.csv
+*.log
+flask_server.*.log
